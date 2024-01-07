@@ -1,0 +1,58 @@
+Arguments: 
+  /data/data/com.termux/files/usr/bin/node /data/data/com.termux/files/usr/share/yarn/bin/yarn.js add cfonts
+
+PATH: 
+  /data/data/com.termux/files/usr/bin
+
+Yarn version: 
+  1.22.19
+
+Node version: 
+  20.2.0
+
+Platform: 
+  android arm64
+
+Trace: 
+  Error [ERR_SOCKET_CONNECTION_TIMEOUT]: Socket connection timeout
+      at new NodeError (node:internal/errors:399:5)
+      at internalConnectMultiple (node:net:1099:20)
+      at Timeout.internalConnectMultipleTimeout (node:net:1638:3)
+      at listOnTimeout (node:internal/timers:575:11)
+      at process.processTimers (node:internal/timers:514:7)
+
+npm manifest: 
+  {
+    "name": "web-api-rest",
+    "version": "1.0.0",
+    "description": "esta es una web api rest desarrollada desde cero por andres-vpn",
+    "main": "index.js",
+    "directories": {
+      "lib": "lib"
+    },
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1",
+      "start": "node index"
+    },
+    "author": "ANDRES-VPN",
+    "license": "ISC",
+    "dependencies": {
+      "@bochilteam/scraper": "^4.2.4",
+      "aptoide-scraper": "^1.0.1",
+      "chalk": "^4.1.0",
+      "chatgpt-scraper": "^1.0.1",
+      "cors": "^2.8.5",
+      "form-data": "^4.0.0",
+      "fs": "^0.0.1-security",
+      "node-fetch": "^2.6.0",
+      "ssl-express-www": "^3.2.1",
+      "util": "^0.12.5",
+      "youtube-yts": "^2.0.0"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
