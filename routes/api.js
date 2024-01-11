@@ -1,5 +1,7 @@
+const {getBuffer} = require("../config")
 __path = process.cwd()
 var express = require("express");
+const  axios = require("axios")
 var router = express.Router();
 var fs = require("fs");
 var util = require("util");
@@ -14,10 +16,9 @@ const{xnxxsearch} = require("../lib/xnxx.js");
 //---MSG-PREDETERMINADOS---\\
 var creador = "ANDRES-VPN"
 //--- LIMIT APIKEY ---\\
-
-////
-//---APIS---\\
 var apilist = ["andres", "escanor"];
+
+
 
 var estado = {
     402: {
@@ -35,29 +36,7 @@ var estado = {
 
 
 
-//
-//routers\\
-router.get('/playtest', async (req, res, next) => {
-  var apikey = req.query.apikey;
-  var text = req.query.text
-  if(!apikey) throw res.json(estado[402])
-  if(apilist.includes(apikey)){
-    var ii = await yts(text)
-    var i =  ii.all[0]
-    var q = "128kbps"
-    var v = i.url
-    require("../lib/ytdl.js").yta(v).then( res => {
-    var url = res.dl_link
-    res.json({
-    creador: creador,
-    estado: true,
-    url: url
-    })
-    })
-  } else {
-    res.json(estado[403])
-  } 
-})
+
 
 router.get('/play', async (req, res, next) => {
   var apikey = req.query.apikey;
@@ -68,10 +47,9 @@ router.get('/play', async (req, res, next) => {
     var i =  ii.all[0]
     var q = "128kbps"
     var v = i.url
-    var y = await youtubedl(v)
-    var yy = await youtubedlv2(v)
+    var y = await youtubedl(v).catch(async (_) => youtubedlv2(v))
     var url = await y.audio[q].download()
-    var url = await yy.audio[q].download()
+    var url2 = await getBuffer(url)
     var titulo = i.title
     var view = i.views
     var duracion = i.timestamp
@@ -92,7 +70,7 @@ router.get('/play', async (req, res, next) => {
         id,
         img,
         url,
-        url2,
+        url2
       }
     })
   } else {
