@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ANDRES-VPN</title>
+  <meta property="og:site_name" name="og:site_name" content="ANDRES-REST-API">
+  <meta property="og:title" name="og:title" content="ANDRES-VPN"> 
+  <meta property="og:url" name="og:url" content="https://telegra.ph/file/df8361bdfa9296145cd12.png">
+  <meta property="og:image" name="og:image" content="https://telegra.ph/file/df8361bdfa9296145cd12.png">
+  <meta property="og:description" name="og:description" content="descarga el contenido de youtube">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Changa:wght@200&family=Rubik+Doodle+Shadow&family=Rubik+Glitch+Pop&display=swap" rel="stylesheet">
+</head>
+<body>
+  <h1>YOUTUBE - DOWNLOADER</h1>
+  <h3>Página web para realizar descargas de la plataforma YouTube</h3>
+  <div class="lineal">
+    <label for="text-input">TEXTO:</label>
+    <input type="text" id="text-input" required>
+    <button id="fetch-button">BUSCAR</button>
+  </div>
+  <div id="result-container"></div>
+  <div id="loader" style="display: none;"><div class="loader"></div></div>
+  <h3><br>Copyright @ANDRES-VPN</br></h3>
+
+
+  <style>
+    body {
+      font-family: 'Rubik Doodle Shadow', system-ui;
+      height: 100vh;
+      background: url("https://telegra.ph/file/e780de9cf11caee8b5d2d.jpg") center/cover no-repeat;
+      position: relative;
+      text-align: center;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: white;
+    }
+
+    h1 {
+      font-family: 'Rubik Doodle Shadow', system-ui;
+      color: black;
+      border: 3px solid #0072e3;
+      border-radius: 10px;
+      background-color: white;
+      overflow: auto;
+    }
+
+    h1, h3 {
+      margin: 10px 0;  
+    }
+    
+    h2 {
+      color: #007bff;     
+    }
+    
+
+    h3 {
+      text-shadow: 0 0 12px black, -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+      font-size: 16px;
+    }
+    
+    p {
+    color: black
+    }
+
+    label {
+      margin-right: 10px;
+    }
+
+    input, button {
+      padding: 10px;
+      font-size: 16px;
+    }
+
+    button {
+      background: #1a82f7;
+      color: white;
+      border: 1px solid #1864ae;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    }
+
+    button:hover {
+      background: #145a9c;
+      border-color: #0f456c;
+    }
+
+    form {
+      margin-top: 20px;
+    }
+
+    .image-panel {
+      max-width: 600px;
+      margin: 20px auto;
+      background: white;
+      border: 1px solid #dee2e6;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      text-align: center;
+    }
+
+    .image-panel img {
+      max-width: 100%;
+      border-radius: 4px;
+      margin-bottom: 20px;
+      max-height: 400px;
+    }
+
+    .mediafire-button {
+      background-color: #0072e3;
+      color: #ffffff;
+      padding: 10px 20px;
+      font-size: 16px;
+      text-decoration: none;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      display: inline-block;
+    }
+
+    .mediafire-button:hover {
+      background-color: #0056b3;
+    }
+
+    .image-details {
+      margin-top: 20px;
+    }
+    
+    .lineal {
+      margin-top: 20px;
+      text-shadow: 0 0 12px black, -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+      font-size: 16px;
+    }
+    
+    
+    #loader {
+      margin-top: 20px;
+      display: none;
+      font-size: 20px;
+      position: relative;
+    }
+
+    .loader {
+      border: 8px solid #f3f3f3;
+      border-top: 8px solid #3498db;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      animation: spin 1s linear infinite;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin-top: -25px;
+      margin-left: -25px;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Obten los elementos necesarios del DOM
+      const textInput = document.getElementById('text-input');
+      const resultContainer = document.getElementById('result-container');
+
+      // Maneja el evento de clic en el botón
+      document.getElementById('fetch-button').addEventListener('click', function() {
+        resultContainer.innerHTML = '';
+        loader.style.display = 'block';
+        // Obtiene los valores de los campos de entrada
+        const text = textInput.value;
+        
+        function required() {
+        loader.style.display = 'none';
+        resultContainer.textContent = "COMPLETA ESTE CAMPO"
+        }
+        if(!text) return required()
+        // Construye la URL con los valores proporcionados
+        const apiUrl = `/api/play?text=${text}&apikey=andres`;
+
+        // Realiza la solicitud fetch
+        fetch(apiUrl)
+          .then(response => response.json())
+          .then(data => {
+            // Manipula el resultado y actualiza el contenido en el DOM
+            loader.style.display = 'none';
+            resultContainer.innerHTML = `
+              <div class="image-panel">
+                <img src="${data.result.thumb}" alt="Imagen">
+                <div class="image-details">
+                  <h2>TITULO: ${data.result.title}</h2>
+                  <p>VISTAS: ${data.result.views}</p>
+                  <p>CALIDAD: ${data.result.quality}</p>
+                  <p>CANAL: ${data.result.channel}</p>
+                  <p>SUBIDO: ${data.result.uploadDate}</p>                  
+                  <a href="${data.result.mp3}" class="mediafire-button" download="AUDIO">AUDIO</a>
+                  <a href="${data.result.mp4}" class="mediafire-button" download="VIDEO">VIDEO</a>
+                </div>
+              </div>`;
+          })
+          .catch(error => {
+            // Maneja errores de la solicitud
+            loader.style.display = 'none';
+            resultContainer.textContent = `Error: ${error.message}`;
+          });
+      });
+    });
+  </script>
+</body>
+</html>

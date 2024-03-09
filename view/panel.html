@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PANEL ANDRES API</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      text-size-adjust: 7px;
+      font-family: 'Black Ops One', system-ui;
+      text-shadow: 0px 0px 12px red, -1px 0px red, 0px 1px red, 1px 0px red, 0px -1px red;
+      background-image: url("https://telegra.ph/file/e780de9cf11caee8b5d2d.jpg");
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+
+    #mainContainer {
+      background-color: black;
+      border: 2px solid gold;
+      padding: 20px;
+      border-radius: 10px;
+      color: white;
+      max-width: 90%; /* Ajuste para hacer adaptable */
+      position: relative;
+    }
+
+    input, button {
+      margin-bottom: 10px;
+    }
+
+    .panel {
+      margin-bottom: 20px;
+    }
+
+    #consolePanel {
+      margin-top: 20px;
+    }
+
+    #consoleMessages {
+      white-space: pre-wrap;
+      max-height: 100px; /* Ajuste para hacer adaptable */
+      overflow-y: auto;
+      background-color: #1a1a1a;
+      color: white;
+      border: 1px solid gold;
+      padding: 10px;
+      border-radius: 5px;
+      margin-top: 10px;
+    }
+
+    #successMessage {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: rgba(0, 255, 0, 0.7);
+      color: white;
+      border: 1px solid #00ff00;
+      padding: 10px;
+      border-radius: 5px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="mainContainer">
+    <h1>PANEL-ANDRES_API</h1>
+
+    <div class="panel" id="newUserPanel">
+      <h2>Agregar Nuevo Usuario</h2>
+      <input type="text" id="newUsername" placeholder="Nombre de usuario">
+      <button onclick="addNewUser()">Agregar Usuario</button>
+      <p id="newUserResult"></p>
+    </div>
+
+    <div class="panel" id="updateGoldPanel">
+      <h2>Actualizar Saldo</h2>
+      <input type="text" id="updateUsername" placeholder="Nombre de usuario">
+      <input type="number" id="updateAmount" placeholder="Cantidad">
+      <button onclick="updateGold()">Actualizar Saldo</button>
+      <p id="updateGoldResult"></p>
+    </div>
+
+    <div class="panel" id="subtractGoldPanel">
+      <h2>Restar Saldo</h2>
+      <input type="text" id="subtractUsername" placeholder="Nombre de usuario">
+      <input type="number" id="subtractAmount" placeholder="Cantidad">
+      <button onclick="subtractGold()">Restar Saldo</button>
+      <p id="subtractGoldResult"></p>
+    </div>
+
+    <div class="panel" id="showBalancePanel">
+      <h2>Mostrar Saldo</h2>
+      <input type="text" id="showUsernamee" placeholder="Nombre de usuario">
+      <button onclick="showBalance()">Mostrar Saldo</button>
+      <p id="balanceResult"></p>
+    </div>
+
+    <div id="consolePanel">
+      <h2>Consola</h2>
+      <pre id="consoleMessages"></pre>
+    </div>
+
+    <div id="successMessage">Operación realizada con éxito</div>
+  </div>
+
+  <script>
+   function addNewUser() {
+  const newUsername = document.getElementById('newUsername').value;
+  fetch('/panelconfig/newuser', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ username: newUsername }),
+  })
+  .then(response => response.text())
+  .then(data => {
+    document.getElementById('newUserResult').innerText = data;
+    logToConsole(data);
+    showSuccessMessage();
+  });
+}
+
+
+    function updateGold() {
+      const updateUsername = document.getElementById('updateUsername').value;
+      const updateAmount = document.getElementById('updateAmount').value;
+      fetch('/panelconfig/newgold', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username: updateUsername, amount: updateAmount }),
+      })
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('updateGoldResult').innerText = data;
+        logToConsole(data);
+        showSuccessMessage();
+      });
+    }
+
+    function subtractGold() {
+      const subtractUsername = document.getElementById('subtractUsername').value;
+      const subtractAmount = document.getElementById('subtractAmount').value;
+      fetch('/panelconfig/menosgold', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username: subtractUsername, amount: subtractAmount }),
+      })
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('subtractGoldResult').innerText = data;
+        logToConsole(data);
+        showSuccessMessage();
+      });
+    }
+
+    function showBalance() {
+      const showUsername = document.getElementById('showUsernamee').value;
+      fetch('/panelconfig/saldo', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username: showUsername }),
+      })
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('balanceResult').innerText = data;
+        logToConsole(data);
+        showSuccessMessage();
+      });
+    }
+
+    function logToConsole(message) {
+      const consoleMessages = document.getElementById('consoleMessages');
+      consoleMessages.innerText += message + '\n';
+      // Scroll automático al final
+      consoleMessages.scrollTop = consoleMessages.scrollHeight;
+    }
+
+    function showSuccessMessage() {
+      const successMessage = document.getElementById('successMessage');
+      successMessage.style.display = 'block';
+      setTimeout(() => {
+        successMessage.style.display = 'none';
+      }, 2000); // Ocultar después de 2 segundos
+    }
+  </script>
+</body>
+</html>
