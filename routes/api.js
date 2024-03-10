@@ -43,12 +43,19 @@ var estado = {
       error: "405",
       mensage: "limite superado",
       contacto: "wa.me/573043603261" ,
+    },
+    500: {
+    creador: creador,
+    error: "500",
+    mensage: "error interno en el servidor",
+    contacto: "wa.me/573043603261" ,
     }
 }///respuestas
 
 
 
 router.get('/ssweb', async (req, res, next) => {
+try{
     const apikey = req.query.apikey;
     const url = req.query.url;
     if (!apikey) throw res.json(estado[402]);
@@ -74,10 +81,15 @@ router.get('/ssweb', async (req, res, next) => {
     } else {
       res.json(estado[403]);
     }
+    } catch (e) {
+    res.json(estado[500]);
+    console.log(e)
+    }
 });
 
 
 router.get('/download-ssweb', (req, res) => {
+try {
     var file = req.query.file;
     var filePath = path.resolve(file);    
     var spotifyFolderPath = path.resolve(__dirname, '../temp');
@@ -88,9 +100,14 @@ router.get('/download-ssweb', (req, res) => {
         // Si el archivo está fuera de la carpeta permitida, enviar un error
         res.status(403).send('Forbidden');
     }
+    } catch (e) {
+    res.json(estado[500]);
+    console.log(e)
+    }
 });
 
 router.get('/spotify', async (req, res) => {
+try {
     var apikey = req.query.apikey;
     var text = req.query.text;
     if (!apikey) throw res.json(estado[402]);
@@ -139,10 +156,15 @@ router.get('/spotify', async (req, res) => {
     } else {
         res.json(estado[403]);
     }
+    } catch (e) {
+    res.json(estado[500]);
+    console.log(e)
+    }
 });
 
 
 router.get('/download-spotify', (req, res) => {
+try{
     var file = req.query.file;
     var filePath = path.resolve(file);    
     var spotifyFolderPath = path.resolve(__dirname, '../spotify');
@@ -153,9 +175,14 @@ router.get('/download-spotify', (req, res) => {
         // Si el archivo está fuera de la carpeta permitida, enviar un error
         res.status(403).send('Forbidden');
     }
+    } catch (e) {
+    res.json(estado[500]);
+    console.log(e)
+    }
 });
 
 router.get('/spotify-search', async (req, res, next) => {
+try{
     var apikey = req.query.apikey;
     var text = req.query.text;
     if (!apikey) throw res.json(estado[402]);
@@ -179,10 +206,15 @@ router.get('/spotify-search', async (req, res, next) => {
     } else {
       res.json(estado[403]);
     }
+    } catch (e) {
+    res.json(estado[500]);
+    console.log(e)
+    }
 });
 
 
 router.get('/limite-apikey', async (req, res, next) => {
+try{
   var apikey = req.query.apikey;
   if(!apikey) throw res.json(estado[402])
   if(user(apikey)){
@@ -203,11 +235,16 @@ router.get('/limite-apikey', async (req, res, next) => {
   } else {
     res.json(estado[403])
   }
+  } catch (e) {
+  res.json(estado[500]);
+    console.log(e)
+  }
 })
 
 
     
 router.get('/xnxxdl', async (req, res, next) => {
+try{
     const apikey = req.query.apikey;
     const url = req.query.url;
     if (!apikey) throw res.json(estado[402]);
@@ -239,12 +276,17 @@ var minutos = decimal.replace(".", ":");
     } else {
       res.json(estado[403]);
     }
+    } catch (e) {
+    res.json(estado[500]);
+    console.log(e)
+    }
 });
 
 
 
 
 router.get('/xnxx-search', async (req, res, next) => {
+try{
     var apikey = req.query.apikey;
     var text = req.query.text;
     if (!apikey) throw res.json(estado[402]);
@@ -275,10 +317,15 @@ var xnxxResult = await xnxxsearch(text);
     } else {
       res.json(estado[403]);
     }
+    } catch (e) {
+    res.json(estado[500]);
+    console.log(e)
+    }
 });
 
 
 router.get('/yt-search', async (req, res, next) => {
+try{
     var apikey = req.query.apikey;
     var text = req.query.text;
     if (!apikey) throw res.json(estado[402]);
@@ -309,10 +356,15 @@ router.get('/yt-search', async (req, res, next) => {
     } else {
       res.json(estado[403]);
     }
+    } catch (e) {
+    res.json(estado[500]);
+    console.log(e)
+    }
 });
 
 
 router.get('/play', async (req, res, next) => {
+try {
     var apikey = req.query.apikey;
     var text = req.query.text;
     if (!apikey) throw res.json(estado[402]);
@@ -359,11 +411,16 @@ router.get('/play', async (req, res, next) => {
     } else {
       res.json(estado[403]);
     }
+    } catch (e) {
+    res.json(estado[500]);
+    console.log(e)
+    }
 });
 
 
 
 router.get('/ytaudio', async (req, res, next ) => {
+try {
   var apikey = req.query.apikey
   var url = req.query.url
   if(!apikey) throw res.json(estado[402])
@@ -393,9 +450,14 @@ router.get('/ytaudio', async (req, res, next ) => {
   } else {
     res.json(estado[403])
   }
+  } catch (e) {
+    res.json(estado[500]);
+    console.log(e)
+    }
 })
 
 router.get('/ytvideo', async (req, res, next ) => {
+try{
   var apikey = req.query.apikey
   var url = req.query.url
   if(!apikey) throw res.json(estado[402])
@@ -426,9 +488,14 @@ router.get('/ytvideo', async (req, res, next ) => {
   } else {
     res.json(estado[403])
   }
+  } catch (e) {
+    res.json(estado[500]);
+    console.log(e)
+    }
 })
 
 router.get('/mediafire', async (req, res, next ) => {
+try {
   var apikey = req.query.apikey
   var url = req.query.url
   if(!apikey) throw res.json(estado[402])
@@ -460,9 +527,14 @@ router.get('/mediafire', async (req, res, next ) => {
   } else {
     res.json(estado[403])
   }
+  } catch (e) {
+    res.json(estado[500]);
+    console.log(e)
+    } 
 })
 
 router.get('/apk', async (req, res, next) => {
+try{
   var apikey = req.query.apikey
   var text = req.query.text
   if(!apikey) throw res.json(estado[402])
@@ -496,9 +568,14 @@ router.get('/apk', async (req, res, next) => {
   } else {
     res.json(estado[403])
   }
+  } catch (e) {
+    res.json(estado[500]);
+    console.log(e)
+    }
 })
 
 router.get('/imagen', async (req, res, next) => {
+try{
   var apikey = req.query.apikey
   var text = req.query.text
   if(!apikey) throw res.json(estado[402])
@@ -517,9 +594,14 @@ router.get('/imagen', async (req, res, next) => {
   } else {
     res.json(estado[403])
   } 
+  } catch (e) {
+    res.json(estado[500]);
+    console.log(e)
+    }
 })
 
 router.get('/lyrics', async (req, res, next) => {
+try{
   var apikey = req.query.apikey
   var text = req.query.text
   if(!apikey) throw res.json(estado[402])
@@ -547,9 +629,14 @@ router.get('/lyrics', async (req, res, next) => {
   } else {
     res.json(estado[403])
   }
+  } catch (e) {
+    res.json(estado[500]);
+    console.log(e)
+    }
 })
 
 router.get('/hentai', async (req, res, next) => {
+try {
   var apikey = req.query.apikey;
   if (!apikey) return res.json(precisos.digitarapikey)
   if (user(apikey)) {
@@ -567,9 +654,14 @@ router.get('/hentai', async (req, res, next) => {
       } else {
         res.json(estado[403])
       }
+      } catch (e) {
+    res.json(estado[500]);
+    console.log(e)
+    }
     })
 
     router.get('/tiktokvideo', async (req, res, next) => {
+    try {
       var apikey = req.query.apikey
       var url = req.query.url
       if(!url.includes("tiktok")) throw res.json({
@@ -605,9 +697,14 @@ router.get('/hentai', async (req, res, next) => {
       } else {
         res.json(estado[403])
       } 
+      } catch (e) {
+    res.json(estado[500]);
+    console.log(e)
+    }
     })
 
     router.get('/tiktokaudio', async (req, res, next) => {
+    try {
       var apikey = req.query.apikey
       var url = req.query.url
       if(!url.includes("tiktok")) throw res.json({
@@ -638,10 +735,15 @@ router.get('/hentai', async (req, res, next) => {
         }
       } else {
         res.json(estado[403])
-      } 
+      }  
+      } catch (e) {
+    res.json(estado[500]);
+    console.log(e)
+    }
     })
     
  router.get('/facebook', async (req, res, next) => {
+ try {
   var apikey = req.query.apikey
   var url = req.query.url
    if(!apikey) return res.json(estado[402])
@@ -669,9 +771,15 @@ router.get('/hentai', async (req, res, next) => {
  } else {
     res.json(estado[403])
   }
- }) 
+   
+      } catch (e) {
+    res.json(estado[500]);
+    console.log(e)
+    }
+    }) 
  
  router.get('/gpt', async (req, res, next) => {
+ try {
   var apikey = req.query.apikey
   var text = req.query.text
   if (!apikey) return res.json(estado[402])
@@ -692,12 +800,18 @@ router.get('/hentai', async (req, res, next) => {
   } else {
     res.json(estado[403])
   }
+   
+      } catch (e) {
+    res.json(estado[500]);
+    console.log(e)
+    }
  })
 
  
  
  
 router.get('/pokemon', async (req, res, next) => {
+try {
   var apikey = req.query.apikey;
   if (!apikey) return res.json(estado[402])
   if (user(apikey)) {
@@ -740,6 +854,10 @@ router.get('/pokemon', async (req, res, next) => {
   } else {
   res.json(estado[403])
   }
+        } catch (e) {
+    res.json(estado[500]);
+    console.log(e)
+    }
 })
  
   
