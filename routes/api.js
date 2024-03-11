@@ -574,6 +574,44 @@ try{
     }
 })
 
+
+router.get('/traductor', async (req, res, next) => {
+try{
+  var apikey = req.query.apikey
+  var text = req.query.text
+  var lang = req.query.lang
+  if(!text) throw res.json({error: "ingresa un texto" })
+  if(!lang) throw res.json({error: "ingresa a que lenguaje al que lo quieres traducir" })
+  if(!apikey) throw res.json(estado[402])
+  if(user(apikey)) {
+    if(saldo(apikey) >= 1) {
+      menosgold(apikey, 1)
+fetch(`https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=${lang}&dt=t&q=${text}`)
+    .then(response => response.json())
+    .then(data => {
+        var resultt = data[0][0][0];
+        res.json({
+        creador: creador,
+        status: true,
+        result: {
+        lang: lang,
+        result: resultt
+        }
+        })
+        
+    })
+    
+  } else {
+    res.json(estado[405])
+  }
+  } else {
+    res.json(estado[403])
+  }
+  } catch (e) {
+    res.json(estado[500]);
+    console.log(e)
+    }
+})
 router.get('/imagen', async (req, res, next) => {
 try{
   var apikey = req.query.apikey
@@ -600,40 +638,6 @@ try{
     }
 })
 
-router.get('/lyrics', async (req, res, next) => {
-try{
-  var apikey = req.query.apikey
-  var text = req.query.text
-  if(!apikey) throw res.json(estado[402])
-  if(user(apikey)) {
-    if(saldo(apikey) >= 1) {
-      menosgold(apikey, 1)
-    var i = await  lyricsv2(text).catch(async _ => await lyrics(text))
-    var titulo = i.title
-    var autor = i.author
-    var link = i.link
-    var letra = i.lyrics
-    res.json({
-      creador: creador,
-      estador: true,
-      result: {
-        titulo,
-        autor,
-        link,
-        letra,
-      }
-    })
-  } else {
-    res.json(estado[405])
-  }
-  } else {
-    res.json(estado[403])
-  }
-  } catch (e) {
-    res.json(estado[500]);
-    console.log(e)
-    }
-})
 
 router.get('/hentai', async (req, res, next) => {
 try {
@@ -659,7 +663,6 @@ try {
     console.log(e)
     }
     })
-
     router.get('/tiktokvideo', async (req, res, next) => {
     try {
       var apikey = req.query.apikey

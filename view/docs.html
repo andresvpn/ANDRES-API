@@ -113,12 +113,6 @@
                 <a href="api/imagen?text=imagen%20de%20leon%20futurista&apikey=SU_APIKEY" class="dropdown__anchor">IMAGEN-GOOGLE</a>
               </li>
               <li class="dropdown__li">
-                <a href="api/lyrics?text=solo%20tu%20nanpa%20basico&apikey=SU_APIKEY" class="dropdown__anchor">LYRICS</a>
-              </li>
-               <li class="dropdown__li">
-                <a href="api/ssweb?url=https://youtube.com&apikey=SU_APIKEY" class="dropdown__anchor">SSWEB</a>
-              </li>
-              <li class="dropdown__li">
                 <a href="api/yt-search?text=musica%20electronica&apikey=SU_APIKEY" class="dropdown__anchor">YT-SEARCH</a>
               </li>
               <li class="dropdown__li">
@@ -162,6 +156,24 @@
             </ul>
           </div>
         </li>
+                      <li class="dropdown__list">
+          <a href="#" class="dropdown__link">
+            <box-icon name='category-alt' color="#FFFFFF"></box-icon>
+            <span class="dropdown__span">SERVICIOS</span>
+            <box-icon name='chevron-down' color="#FFFFFF" class="dropdown__arrow"></box-icon>
+            <input type="checkbox" class="dropdown__check">
+          </a>
+          <div class="dropdown__content">
+            <ul class="dropdown__sub">
+               <li class="dropdown__li">
+                <a href="api/ssweb?url=https://youtube.com&apikey=SU_APIKEY" class="dropdown__anchor">SSWEB</a>
+              </li>
+              <li class="dropdown__li">
+                <a href="api/traductor?text=hola%20como%20estas&lang=en&apikey=SU_APIKEY" class="dropdown__anchor">TRADUCTOR</a>
+              </li>
+            </ul>
+          </div>
+        </li>
       </ul>
 
 
@@ -181,12 +193,12 @@
         <p>apikey free</p>
     </div>
     <div class="panel">
-        <h2 id="ip-address">Cargando...</h2>
-        <p>DIRECCION IP</p>
+        <h2 id="limite">Cargando...</h2>
+        <p>limite apikey</p>
     </div>
     <div class="panel">
-        <h2 id="fecha">Cargando...</h2>
-        <p>dia : mes : year</p>
+        <h2 id="total_users">Cargando...</h2>
+        <p>total solicitudes</p>
     </div>
     <div class="panel">
       <h2 id="hora">Cargando...</h2>
@@ -475,63 +487,37 @@ text-body {
     horaElemento.textContent = horaActual;
 }
 
-// Actualizar la hora cada segundo
 setInterval(actualizarHora, 1000);
 
 // Llamar a la función para mostrar la hora actual
 actualizarHora();
 
-        // Función para obtener la dirección IP del usuario
-        function obtenerDireccionIP(callback){
-    fetch('https://api64.ipify.org?format=json')
-        .then(response => response.json())
-        .then(data => {
-            callback(data.ip);
-        });
-}
-
-// Función para actualizar el elemento HTML con la dirección IP
-function actualizarDireccionIP(ip){
-    const ipElemento = document.getElementById('ip-address');
-    ipElemento.textContent = ip;
-}
-
-// Obtener y mostrar la dirección IP al cargar la página
-window.addEventListener('load', function(){
-    obtenerDireccionIP(actualizarDireccionIP);
-});
-
-    // Función para obtener la fecha actual
-    function obtenerFechaActual() {
-    const fechaActual = new Date();
-    const opciones = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-    return fechaActual.toLocaleDateString('es-ES', opciones);
-}
-
-// Función para actualizar el elemento HTML con la fecha actual
-function mostrarFecha() {
-    // Obtener la fecha actual
-    const fechaActual = new Date();
-
-    // Obtener los componentes de la fecha (día, mes y año)
-    const dia = fechaActual.getDate();
-    const mes = fechaActual.getMonth() + 1; // Sumar 1 porque los meses comienzan desde 0
-    const año = fechaActual.getFullYear();
-
-    // Crear una cadena de texto con la fecha formateada (en este caso, formato "DD/MM/AAAA")
-    const fechaFormateada = `${dia}/${mes}/${año}`;
-
-    // Mostrar la fecha en un elemento HTML con el id "fecha"
-    document.getElementById("fecha").textContent = fechaFormateada;
-}
-
-// Llamar a la función mostrarFecha para mostrar la fecha actual cuando la página se carga
 
 
+function total_users() {
+        const apiUrl = "/api/limite-apikey?apikey=andres";
 
-// Obtener y mostrar la fecha actual al cargar la página
-window.addEventListener('load', function() {
-  mostrarFecha();
-});
+        // Realiza la solicitud fetch
+        fetch(apiUrl)
+          .then(response => response.json())
+          .then(data => {
+          document.getElementById("limite").innerHTML = data.result.limite
+         })
+         }
+         setInterval(limite, 5000)
+         limite()
+         function limite() {
+        const apiUrl = "/api/limite-apikey?apikey=andres";
+
+        // Realiza la solicitud fetch
+        fetch(apiUrl)
+          .then(response => response.json())
+          .then(data => {
+          document.getElementById("total_users").innerHTML = data.result.total_search_users
+         })
+         }
+         setInterval(total_users, 5000)
+         total_users()
+         
 </script>
 
