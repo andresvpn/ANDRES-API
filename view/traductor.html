@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ANDRES-VPN</title>
+  <meta property="og:site_name" name="og:site_name" content="ANDRES-REST-API">
+  <meta property="og:title" name="og:title" content="ANDRES-VPN"> 
+  <meta property="og:url" name="og:url" content="https://telegra.ph/file/df8361bdfa9296145cd12.png">
+  <meta property="og:image" name="og:image" content="https://telegra.ph/file/df8361bdfa9296145cd12.png">
+  <meta property="og:description" name="og:description" content="traductor">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Changa:wght@200&family=Rubik+Doodle+Shadow&family=Rubik+Glitch+Pop&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        label {
+            font-weight: bold;
+        }
+        select, textarea, button {
+            margin-top: 5px;
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #resultado {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        @media only screen and (max-width: 600px) {
+            .container {
+                width: 90%;
+            }
+        }
+        
+.video-panel {
+    max-width: 100%;
+    margin: 0 auto;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+video {
+    width: 100%;
+    height: auto;
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Traductor</h1>
+        <label for="texto">Texto a traducir:</label>
+        <textarea id="texto" rows="5" required></textarea>
+        
+        <label for="idioma_destino">Idioma de destino:</label>
+<select id="idioma_destino">
+    <option value="af">Afrikaans</option>
+    <option value="ak">Akan</option>
+    <option value="am">Amhárico</option>
+    <option value="ar">Árabe</option>
+    <option value="as">Asamés</option>
+    <option value="ay">Aymara</option>
+    <option value="az">Azerbaiyano</option>
+    <option value="be">Bielorruso</option>
+    <option value="bg">Búlgaro</option>
+    <option value="bh">Bhojpurí</option>
+    <option value="bm">Bambara</option>
+    <option value="bn">Bengalí</option>
+    <option value="br">Bretón</option>
+    <option value="bs">Bosnio</option>
+    <option value="ca">Catalán</option>
+    <option value="ce">Checheno</option>
+    <option value="ch">Chamorro</option>
+    <option value="co">Corso</option>
+    <option value="cr">Cree</option>
+    <option value="cs">Checo</option>
+    <option value="cu">Eslavo eclesiástico</option>
+    <option value="cv">Chuvash</option>
+    <option value="cy">Galés</option>
+    <option value="da">Danés</option>
+    <option value="de">Alemán</option>
+    <option value="dv">Divehi</option>
+    <option value="ee">Ewe</option>
+    <option value="el">Griego</option>
+    <option value="en">Inglés</option>
+    <option value="eo">Esperanto</option>
+    <option value="es">Español</option>
+    <option value="et">Estonio</option>
+    <option value="eu">Vasco</option>
+    <option value="fa">Persa</option>
+    <option value="ff">Fulfulde</option>
+    <option value="fi">Finés</option>
+    <option value="fj">Fiyiano</option>
+    <option value="fo">Feroés</option>
+    <option value="fr">Francés</option>
+    <option value="fy">Frisón</option>
+    <option value="ga">Irlandés</option>
+    <option value="gd">Gaélico escocés</option>
+    <option value="gl">Gallego</option>
+    <option value="gn">Guaraní</option>
+    <option value="gu">Guyaratí</option>
+    <option value="gv">Manés</option>
+    <option value="ha">Hausa</option>
+    <option value="he">Hebreo</option>
+    <option value="hi">Hindi</option>
+    <option value="ho">Hiri motu</option>
+    <option value="hr">Croata</option>
+    <option value="ht">Criollo haitiano</option>
+    <option value="hu">Húngaro</option>
+    <option value="hy">Armenio</option>
+    <option value="hz">Herero</option>
+    <option value="ia">Interlingua</option>
+    <option value="id">Indonesio</option>
+    <option value="ie">Interlingue</option>
+    <option value="ig">Igbo</option>
+    <option value="ii">Yi de Sichuán</option>
+    <option value="ik">Iñupiaq</option>
+    <option value="io">Ido</option>
+    <option value="is">Islandés</option>
+    <option value="it">Italiano</option>
+    <option value="iu">Inuktitut</option>
+    <option value="ja">Japonés</option>
+    <option value="jv">Javanés</option>
+    <option value="ka">Georgiano</option>
+    <option value="kg">Kongo</option>
+    <option value="ki">Kikuyu</option>
+    <option value="kj">Kuanyama</option>
+    <option value="kk">Kazajo</option>
+    <option value="kl">Groenlandés</option>
+    <option value="km">Camboyano</option>
+    <option value="kn">Canarés</option>
+    <option value="ko">Coreano</option>
+    <option value="kr">Kanuri</option>
+    <option value="ks">Cachemiro</option>
+    <option value="ku">Kurdo</option>
+    <option value="kv">Komi</option>
+    <option value="kw">Córnico</option>
+    <option value="ky">Kirguís</option>
+    <option value="la">Latín</option>
+    <option value="lb">Luxemburgués</option>
+    <option value="lg">Luganda</option>
+    <option value="li">Limburgués</option>
+    <option value="ln">Lingala</option>
+    <option value="lo">Lao</option>
+    <option value="lt">Lituano</option>
+    <option value="lu">Luba-katanga</option>
+    <option value="lv">Letón</option>
+    <option value="mg">Malgache</option>
+    <option value="mh">Marshalés</option>
+    <option value="mi">Maorí</option>
+    <option value="mk">Macedonio</option>
+    <option value="ml">Malayalam</option>
+    <option value="mn">Mongol</option>
+    <option value="mo">Moldavo</option>
+    <option value="mr">Maratí</option>
+    <option value="ms">Malayo</option>
+    <option value="mt">Maltés</option>
+    <option value="my">Birmano</option>
+    <option value="na">Nauruano</option>
+    <option value="nb">Noruego bokmål</option>
+    <option value="nd">Ndebele del norte</option>
+    <option value="ne">Nepalí</option>
+    <option value="ng">Ndongo</option>
+    <option value="nl">Neerlandés</option>
+    <option value="nn">Nynorsk</option>
+    <option value="no">Noruego</option>
+    <option value="nr">Ndebele del sur</option>
+    <option value="nv">Navajo</option>
+    <option value="ny">Chichewa</option>
+    <option value="oc">Occitano</option>
+    <option value="oj">Ojibwa</option>
+    <option value="om">Oromo</option>
+    <option value="or">Oriya</option>
+    <option value="os">Osetio</option>
+    <option value="pa">Panyabí</option>
+    <option value="pi">Pali</option>
+    <option value="pl">Polaco</option>
+    <option value="ps">Pastú</option>
+    <option value="pt">Portugués</option>
+    <option value="qu">Quechua</option>
+    <option value="rm">Retorrománico</option>
+    <option value="rn">Kirundi</option>
+    <option value="ro">Rumano</option>
+    <option value="ru">Ruso</option>
+    <option value="rw">Kinyarwanda</option>
+    <option value="sa">Sánscrito</option>
+    <option value="sc">Sardo</option>
+    <option value="sd">Sindhi</option>
+    <option value="se">Sami septentrional</option>
+    <option value="sg">Sango</option>
+    <option value="si">Cingalés</option>
+    <option value="sk">Eslovaco</option>
+    <option value="sl">Esloveno</option>
+    <option value="sm">Samoano</option>
+    <option value="sn">Shona</option>
+    <option value="so">Somalí</option>
+    <option value="sq">Albanés</option>
+    <option value="sr">Serbio</option>
+    <option value="ss">Suazi</option>
+    <option value="st">Sesotho</option>
+    <option value="su">Sundanés</option>
+    <option value="sv">Sueco</option>
+    <option value="sw">Suajili</option>
+    <option value="ta">Tamil</option>
+    <option value="te">Telugu</option>
+    <option value="tg">Tayiko</option>
+    <option value="th">Tailandés</option>
+    <option value="ti">Tigrinya</option>
+    <option value="tk">Turcomano</option>
+    <option value="tl">Tagalo</option>
+    <option value="tn">Setsuana</option>
+    <option value="to">Tongano</option>
+    <option value="tr">Turco</option>
+    <option value="ts">Tsonga</option>
+    <option value="tt">Tartaro</option>
+    <option value="tw">Twi</option>
+    <option value="ty">Tahitiano</option>
+    <option value="ug">Uigur</option>
+    <option value="uk">Ucraniano</option>
+    <option value="ur">Urdu</option>
+    <option value="uz">Uzbeko</option>
+    <option value="ve">Venda</option>
+    <option value="vi">Vietnamita</option>
+    <option value="vo">Volapük</option>
+    <option value="wa">Valón</option>
+    <option value="wo">Wolof</option>
+    <option value="xh">Xhosa</option>
+    <option value="yi">Yidis</option>
+    <option value="yo">Yoruba</option>
+    <option value="za">Zhuang</option>
+    <option value="zh">Chino</option>
+    <option value="zu">Zulú</option>
+</select>
+        <button onclick="traducir()">Traducir</button>
+        
+        <h2>Resultado:</h2>
+        <div id="resultado"></div>
+    </div>
+    <div class="video-panel">
+    <video autoplay="true" controls loop>
+        <source src="/api/video-edit" type="video/mp4">
+        Tu navegador no soporta la etiqueta de vídeo.
+    </video>
+</div>
+<h3 style="text-align: center;">copyright @2024 andres-vpn</h3>
+
+    
+</div>
+    <script>
+        function traducir() {
+    var text = document.getElementById('texto').value;
+    var lang = document.getElementById('idioma_destino').value;
+
+    const apiUrl = `/api/traductor?apikey=andres&lang=${lang}&text=${text}`;
+
+    // Realiza la solicitud fetch
+    fetch(apiUrl)
+        .then(response => {
+            if (!response.ok) {
+                throw new console.log(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data.status && data.result) {
+                document.getElementById('resultado').innerText = data.result.result;
+            } else {
+                throw new Error('error, el idioma selecciona no responde, intenta con otro...');
+            }
+        })
+        .catch(error => {
+            console.error('Error al procesar la solicitud fetch:', error);
+            document.getElementById('resultado').innerText = "Ocurrió un error al obtener una respuesta correcta";
+        });
+}
+            
+
+    </script>
+</body>
+</html>

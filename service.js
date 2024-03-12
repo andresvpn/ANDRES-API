@@ -45,12 +45,25 @@ function tiktok(result) {
    }
 /////
 ///YOUTUBE-PLAY - DOWNLOAD
+app.get("/", (req, res) => {
+  res.sendFile(__dirname + "/view/service.html");
+})
 app.get("/youtube", (req, res) => {
   res.sendFile(__dirname + "/view/youtube.html");
 });
 
+app.get("/traductor", (req, res) => {
+  res.sendFile(__dirname + "/view/traductor.html");
+});
+
+
 app.get("/spotify", (req, res) => {
 res.sendFile(__dirname + "/view/spotify.html");
 })
+
+app.get("/aptoide", (req, res) => {
+res.sendFile(__dirname + "/view/aptoide.html");
+})
+
 /////
 module.exports = app

@@ -53,6 +53,53 @@ var estado = {
 }///respuestas
 
 
+//videos//descargas
+
+router.get('/video-edit', (req, res) => {
+    const videoPath = path.join(__dirname, 'videos', 'video.mp4');
+    res.sendFile(videoPath);
+});
+router.get('/video-edit2', (req, res) => {
+    const videoPath = path.join(__dirname, 'videos', 'escanor.mp4');
+    res.sendFile(videoPath);
+});
+
+router.get('/download-ssweb', (req, res) => {
+try {
+    var file = req.query.file;
+    var filePath = path.resolve(file);    
+    var spotifyFolderPath = path.resolve(__dirname, '../temp');
+    if (filePath.startsWith(spotifyFolderPath)) {
+        // Si está dentro de la carpeta permitida, enviar el archivo como descarga
+        res.download(filePath);
+    } else {
+        // Si el archivo está fuera de la carpeta permitida, enviar un error
+        res.status(403).send('Forbidden');
+    }
+    } catch (e) {
+    res.json(estado[500]);
+    console.log(e)
+    }
+});
+
+router.get('/download-spotify', (req, res) => {
+try{
+    var file = req.query.file;
+    var filePath = path.resolve(file);    
+    var spotifyFolderPath = path.resolve(__dirname, '../spotify');
+    if (filePath.startsWith(spotifyFolderPath)) {
+        // Si está dentro de la carpeta permitida, enviar el archivo como descarga
+        res.download(filePath);
+    } else {
+        // Si el archivo está fuera de la carpeta permitida, enviar un error
+        res.status(403).send('Forbidden');
+    }
+    } catch (e) {
+    res.json(estado[500]);
+    console.log(e)
+    }
+});
+
 
 router.get('/ssweb', async (req, res, next) => {
 try{
@@ -88,23 +135,6 @@ try{
 });
 
 
-router.get('/download-ssweb', (req, res) => {
-try {
-    var file = req.query.file;
-    var filePath = path.resolve(file);    
-    var spotifyFolderPath = path.resolve(__dirname, '../temp');
-    if (filePath.startsWith(spotifyFolderPath)) {
-        // Si está dentro de la carpeta permitida, enviar el archivo como descarga
-        res.download(filePath);
-    } else {
-        // Si el archivo está fuera de la carpeta permitida, enviar un error
-        res.status(403).send('Forbidden');
-    }
-    } catch (e) {
-    res.json(estado[500]);
-    console.log(e)
-    }
-});
 
 router.get('/spotify', async (req, res) => {
 try {
@@ -163,23 +193,7 @@ try {
 });
 
 
-router.get('/download-spotify', (req, res) => {
-try{
-    var file = req.query.file;
-    var filePath = path.resolve(file);    
-    var spotifyFolderPath = path.resolve(__dirname, '../spotify');
-    if (filePath.startsWith(spotifyFolderPath)) {
-        // Si está dentro de la carpeta permitida, enviar el archivo como descarga
-        res.download(filePath);
-    } else {
-        // Si el archivo está fuera de la carpeta permitida, enviar un error
-        res.status(403).send('Forbidden');
-    }
-    } catch (e) {
-    res.json(estado[500]);
-    console.log(e)
-    }
-});
+
 
 router.get('/spotify-search', async (req, res, next) => {
 try{
@@ -242,7 +256,7 @@ try{
 })
 
 
-    
+   
 router.get('/xnxxdl', async (req, res, next) => {
 try{
     const apikey = req.query.apikey;
@@ -576,42 +590,48 @@ try{
 
 
 router.get('/traductor', async (req, res, next) => {
-try{
-  var apikey = req.query.apikey
-  var text = req.query.text
-  var lang = req.query.lang
-  if(!text) throw res.json({error: "ingresa un texto" })
-  if(!lang) throw res.json({error: "ingresa a que lenguaje al que lo quieres traducir" })
-  if(!apikey) throw res.json(estado[402])
-  if(user(apikey)) {
-    if(saldo(apikey) >= 1) {
-      menosgold(apikey, 1)
-fetch(`https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=${lang}&dt=t&q=${text}`)
-    .then(response => response.json())
-    .then(data => {
-        var resultt = data[0][0][0];
-        res.json({
-        creador: creador,
-        status: true,
-        result: {
-        lang: lang,
-        result: resultt
+  try {
+    var apikey = req.query.apikey;
+    var text = req.query.text;
+    var lang = req.query.lang;
+    if (!text) throw res.json({ error: "ingresa un texto" });
+    if (!lang) throw res.json({ error: "ingresa a que lenguaje al que lo quieres traducir" });
+    if (!apikey) throw res.json(estado[402]);
+    if (user(apikey)) {
+      if (saldo(apikey) >= 1) {
+        menosgold(apikey, 1);
+        try {
+          const response = await fetch(`https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=${lang}&dt=t&q=${text}`);
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          const data = await response.json();
+          var resultt = data[0][0][0];
+          res.json({
+            creador: creador,
+            status: true,
+            result: {
+              lang: lang,
+              result: resultt
+            }
+          });
+        } catch (err) {
+          console.error('Error al procesar la solicitud fetch:', err);
+          res.json(estado[500]);
         }
-        })
-        
-    })
-    
-  } else {
-    res.json(estado[405])
-  }
-  } else {
-    res.json(estado[403])
-  }
-  } catch (e) {
-    res.json(estado[500]);
-    console.log(e)
+      } else {
+        res.json(estado[405]);
+      }
+    } else {
+      res.json(estado[403]);
     }
-})
+  } catch (e) {
+    console.error('Error inesperado:', e);
+    res.json(estado[500]);
+  }
+});
+
+
 router.get('/imagen', async (req, res, next) => {
 try{
   var apikey = req.query.apikey
