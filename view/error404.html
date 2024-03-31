@@ -1,69 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://telegra.ph/file/df8361bdfa9296145cd12.png" rel="icon" />
-  <title>ANDRES-REST APIS</title>
-  <meta property="og:site_name" name="og:site_name" content="ANDRES-REST-API">
-  <meta poperty="og:title" name="og:title" content="ANDRES-VPN"> 
-  <meta property="og:url" name="og:url" content="docsuri/">
-  <meta property="og:image" name="og:image" content="https://telegra.ph/file/df8361bdfa9296145cd12.png">
-  <meta property="og:description" name="og:description" content="pagina no encontrada">
-  
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Changa:wght@200&family=Rubik+Doodle+Shadow&family=Rubik+Glitch+Pop&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ANDRES-VPN</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        background-color: #f8f9fa;
+        overflow: hidden; /* Evita la barra de desplazamiento vertical */
+        position: relative;
+    }
+    .container {
+        max-width: 800px;
+        margin: 50px auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        text-align: center;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        position: relative; /* Para que los elementos internos sean posicionados relativos a este contenedor */
+        z-index: 1; /* Para estar sobre las olas */
+    }
+    .profile-img {
+        border-radius: 50%;
+        width: 200px;
+        height: 200px;
+        object-fit: cover;
+        margin-bottom: 20px;
+    }
+    .social-icons {
+        margin-top: 20px;
+    }
+    .social-icons a {
+        color: #333;
+        text-decoration: none;
+        font-size: 24px;
+        margin: 0 10px;
+        transition: color 0.3s;
+    }
+    .social-icons a:hover {
+        color: #f00; /* Cambia el color al pasar el mouse */
+        transform: scale(1.2); /* Efecto de aumento de tamaño */
+    }
+    .btn {
+        display: inline-block;
+        padding: 10px 20px;
+        margin-top: 20px;
+        background-color: #007bff;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+    }
+    .btn:hover {
+        background-color: #0056b3; /* Cambia el color al pasar el mouse */
+    }
+    
+    .video-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw; /* 100% del ancho de la ventana */
+    height: 100vh; /* 100% de la altura de la ventana */
+    overflow: hidden;
+    z-index: -1;
+}
 
+#video-bg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Centrar el video */
+    min-width: 100%;
+    min-height: 100%;
+}
+
+</style>
 </head>
 <body>
-<br><br></br></br>
-  <h1 class="nav_title">Error 404<br>Página no encontrada</br></h1>
-  <br><br><br>  </br></br></br>
-  <div class="nav_descripcion">
-  <p>español:</p>
-  <p>Lo sentimos, la página que buscas no existe.</p>
-  </div>
-  <div class="nav_descripcion">
-  <p>português:</p>
-  <p>Desculpe, a página que você procura não existe..</p>
-  </div>
-    <div class="nav_descripcion">
-  <p>english:</p>
-  <p>Sorry, the page you are looking for does not exist.</p>
-  </div>
-
+    <div class="video-container">
+        <video autoplay muted loop id="video-bg">
+            <source src="api/video-edit3" type="video/mp4">
+        </video>
+    <div class="container">
+        <img class="profile-img" src="https://telegra.ph/file/8e7046bdc9608ea9a8edf.jpg" alt="Profile Picture">
+        <h1>ERROR 404</h1>
+        <p>pagina no encontrada</p>
+        
+        <div class="social-icons">
+            <a href="https://wa.me/573043603261/" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            <a href="https://www.tiktok.com/@andres_carvajal_ofc?_t=8ktoypI5qq5&_r=1" target="_blank"><i class="fab fa-tiktok"></i></a>
+            <a href="https://www.instagram.com/andres_carvajal_ofc?igsh=MXBtM2dsdHl5aTJkaQ==" target="_blank"><i class="fab fa-instagram"></i></a>
+        </div>
+    </div>
+    </div>
+</body>
 </html>
-<style>
-  body {
-        height: 100vh;
-        margin: 0;
-        text-size-adjust: 7px;
-        background-image: url("https://telegra.ph/file/e780de9cf11caee8b5d2d.jpg");
-        background-position: center center;
-        background-repeat: no-repeat;
-        background-size: cover;
-        height: 100vh;
-          }
-               
-      .nav_title {
-      text-align: center;
-      color: #eceff1;
-      font-family: 'Rubik Doodle Shadow', system-ui;
-      color: black;
-      border: 3px solid #0072e3;
-      border-radius: 10px;
-      background-color: white;
-      overflor: auto;
-      }
-      
-      .nav_descripcion {
-      text-align: center;
-      color: #eceff1;
-      font-family: 'Black Ops One', system-ui;
-      border: 2px solid white;
-      background-color: #424949
-      }
-</style>
-

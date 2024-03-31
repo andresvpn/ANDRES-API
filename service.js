@@ -56,6 +56,9 @@ app.get("/traductor", (req, res) => {
   res.sendFile(__dirname + "/view/traductor.html");
 });
 
+app.get("/max", (req, res) => {
+  res.sendFile(__dirname + "/view/max.html");
+});
 
 app.get("/spotify", (req, res) => {
 res.sendFile(__dirname + "/view/spotify.html");
@@ -64,6 +67,12 @@ res.sendFile(__dirname + "/view/spotify.html");
 app.get("/aptoide", (req, res) => {
 res.sendFile(__dirname + "/view/aptoide.html");
 })
+
+
+app.get("/payment", (req, res) => {
+res.sendFile(__dirname + "/view/pago.html");
+})
+
 
 /////
 module.exports = app

@@ -15,9 +15,10 @@ var FormData = require("form-data");
 var fetch = require("node-fetch");
 //------DOWNLOAD------\\
 const yts = require("youtube-yts");
+const texpro1 = require("../lib/textpro");
 const{youtubedl, youtubedlv2, googleImage, lyrics, lyricsv2, mediafiredl} = require("@bochilteam/scraper")
 const{xnxxsearch} = require("../lib/xnxx.js");
-
+const TelegraPh = require("../lib/telegra")
 async function acortar(url) {
     const response = await axios.get(`https://tinyurl.com/api-create.php?url=${url}`);
     const acortado = response.data;
@@ -51,8 +52,40 @@ var estado = {
     contacto: "wa.me/573043603261" ,
     }
 }///respuestas
-
-
+const imgtext = async (urlv2) => {
+  var imagePath = './temp/textpro.jpg';
+  
+  return new Promise((resolve, reject) => {
+    axios({
+      method: 'get',
+      url: urlv2,
+      responseType: 'stream',
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'
+      }
+    })
+    .then(response => {
+      response.data.pipe(fs.createWriteStream(imagePath))
+        .on('finish', () => {
+          TelegraPh(imagePath)
+            .then(reupload => {
+              resolve(reupload);
+            })
+            .catch(err => {
+              reject(err);
+            });
+        })
+        .on('error', (err) => {
+          console.error('Error al guardar la imagen:', err);
+          reject(err);
+        });
+    })
+    .catch(error => {
+      console.error('Error al descargar la imagen:', error);
+      reject(error);
+    });
+  });
+};
 //videos//descargas
 
 router.get('/video-edit', (req, res) => {
@@ -61,6 +94,10 @@ router.get('/video-edit', (req, res) => {
 });
 router.get('/video-edit2', (req, res) => {
     const videoPath = path.join(__dirname, 'videos', 'escanor.mp4');
+    res.sendFile(videoPath);
+});
+router.get('/video-edit3', (req, res) => {
+    const videoPath = path.join(__dirname, 'videos', 'edit.mp4');
     res.sendFile(videoPath);
 });
 
@@ -134,7 +171,550 @@ try{
     }
 });
 
+router.get('/texpro-dia', async (req, res) => {
+  try {
+    var apikey = req.query.apikey;
+    var text = req.query.text;
+    if (!apikey) throw res.json(estado[402]);
+    if (!text) throw res.json({ error: "campo text incompleto"})
+    if (user(apikey)) {
+        if (saldo(apikey) >= 1) {
+            menosgold(apikey, 1)
+            texpro1("dia", text).then(result => {
+              imgtext(result.image).then(finish => {
+                
+    res.sendFile(__path + '/temp/textpro.jpg')
+              }).catch(error => {
+                console.error('Error al procesar la imagen:', error);
+                res.json(estado[500]);
+              });
+            }).catch(error => {
+              console.error('Error al procesar el texto:', error);
+              res.json(estado[500]);
+            });
+        } else {
+            res.json(estado[405]);
+        }
+    } else {
+        res.json(estado[403]);
+    }
+  } catch (e) {
+    console.log(e);
+    res.json(estado[500]);
+  }
+});
 
+router.get('/texpro-shuek', async (req, res) => {
+  try {
+    var apikey = req.query.apikey;
+    var text = req.query.text;
+    if (!apikey) throw res.json(estado[402]);
+    if (!text) throw res.json({ error: "campo text incompleto"})
+    if (user(apikey)) {
+        if (saldo(apikey) >= 1) {
+            menosgold(apikey, 1)
+            texpro1("shuek", text).then(result => {
+              imgtext(result.image).then(finish => {
+
+              }).catch(error => {
+                console.error('Error al procesar la imagen:', error);
+                res.json(estado[500]);
+              });
+            }).catch(error => {
+              console.error('Error al procesar el texto:', error);
+              res.json(estado[500]);
+            });
+        } else {
+            res.json(estado[405]);
+        }
+    } else {
+        res.json(estado[403]);
+    }
+  } catch (e) {
+    console.log(e);
+    res.json(estado[500]);
+  }
+});
+
+router.get('/texpro-lapiz', async (req, res) => {
+  try {
+    var apikey = req.query.apikey;
+    var text = req.query.text;
+    if (!apikey) throw res.json(estado[402]);
+    if (!text) throw res.json({ error: "campo text incompleto"})
+    if (user(apikey)) {
+        if (saldo(apikey) >= 1) {
+            menosgold(apikey, 1)
+            texpro1("lapiz", text).then(result => {
+              imgtext(result.image).then(finish => {
+    res.sendFile(__path + '/temp/textpro.jpg')
+              }).catch(error => {
+                console.error('Error al procesar la imagen:', error);
+                res.json(estado[500]);
+              });
+            }).catch(error => {
+              console.error('Error al procesar el texto:', error);
+              res.json(estado[500]);
+            });
+        } else {
+            res.json(estado[405]);
+        }
+    } else {
+        res.json(estado[403]);
+    }
+  } catch (e) {
+    console.log(e);
+    res.json(estado[500]);
+  }
+});
+
+router.get('/texpro-blackwall', async (req, res) => {
+  try {
+    var apikey = req.query.apikey;
+    var text = req.query.text;
+    if (!apikey) throw res.json(estado[402]);
+    if (!text) throw res.json({ error: "campo text incompleto"})
+    if (user(apikey)) {
+        if (saldo(apikey) >= 1) {
+            menosgold(apikey, 1)
+            texpro1("blackwall", text).then(result => {
+              imgtext(result.image).then(finish => {
+    res.sendFile(__path + '/temp/textpro.jpg')
+              }).catch(error => {
+                console.error('Error al procesar la imagen:', error);
+                res.json(estado[500]);
+              });
+            }).catch(error => {
+              console.error('Error al procesar el texto:', error);
+              res.json(estado[500]);
+            });
+        } else {
+            res.json(estado[405]);
+        }
+    } else {
+        res.json(estado[403]);
+    }
+  } catch (e) {
+    console.log(e);
+    res.json(estado[500]);
+  }
+});
+
+router.get('/texpro-madera', async (req, res) => {
+  try {
+    var apikey = req.query.apikey;
+    var text = req.query.text;
+    if (!apikey) throw res.json(estado[402]);
+    if (!text) throw res.json({ error: "campo text incompleto"})
+    if (user(apikey)) {
+        if (saldo(apikey) >= 1) {
+            menosgold(apikey, 1)
+            texpro1("madera", text).then(result => {
+              imgtext(result.image).then(finish => {
+    res.sendFile(__path + '/temp/textpro.jpg')
+              }).catch(error => {
+                console.error('Error al procesar la imagen:', error);
+                res.json(estado[500]);
+              });
+            }).catch(error => {
+              console.error('Error al procesar el texto:', error);
+              res.json(estado[500]);
+            });
+        } else {
+            res.json(estado[405]);
+        }
+    } else {
+        res.json(estado[403]);
+    }
+  } catch (e) {
+    console.log(e);
+    res.json(estado[500]);
+  }
+});
+
+router.get('/texpro-oso', async (req, res) => {
+  try {
+    var apikey = req.query.apikey;
+    var text = req.query.text;
+    if (!apikey) throw res.json(estado[402]);
+    if (!text) throw res.json({ error: "campo text incompleto"})
+    if (user(apikey)) {
+        if (saldo(apikey) >= 1) {
+            menosgold(apikey, 1)
+            texpro1("oso", text).then(result => {
+              imgtext(result.image).then(finish => {
+    res.sendFile(__path + '/temp/textpro.jpg')
+              }).catch(error => {
+                console.error('Error al procesar la imagen:', error);
+                res.json(estado[500]);
+              });
+            }).catch(error => {
+              console.error('Error al procesar el texto:', error);
+              res.json(estado[500]);
+            });
+        } else {
+            res.json(estado[405]);
+        }
+    } else {
+        res.json(estado[403]);
+    }
+  } catch (e) {
+    console.log(e);
+    res.json(estado[500]);
+  }
+});
+
+router.get('/texpro-spooky', async (req, res) => {
+  try {
+    var apikey = req.query.apikey;
+    var text = req.query.text;
+    if (!apikey) throw res.json(estado[402]);
+    if (!text) throw res.json({ error: "campo text incompleto"})
+    if (user(apikey)) {
+        if (saldo(apikey) >= 1) {
+            menosgold(apikey, 1)
+            texpro1("spooky", text).then(result => {
+              imgtext(result.image).then(finish => {
+    res.sendFile(__path + '/temp/textpro.jpg')
+              }).catch(error => {
+                console.error('Error al procesar la imagen:', error);
+                res.json(estado[500]);
+              });
+            }).catch(error => {
+              console.error('Error al procesar el texto:', error);
+              res.json(estado[500]);
+            });
+        } else {
+            res.json(estado[405]);
+        }
+    } else {
+        res.json(estado[403]);
+    }
+  } catch (e) {
+    console.log(e);
+    res.json(estado[500]);
+  }
+});
+
+router.get('/texpro-naruto', async (req, res) => {
+  try {
+    var apikey = req.query.apikey;
+    var text = req.query.text;
+    if (!apikey) throw res.json(estado[402]);
+    if (!text) throw res.json({ error: "campo text incompleto"})
+    if (user(apikey)) {
+        if (saldo(apikey) >= 1) {
+            menosgold(apikey, 1)
+            texpro1("naruto", text).then(result => {
+              imgtext(result.image).then(finish => {
+    res.sendFile(__path + '/temp/textpro.jpg')
+              }).catch(error => {
+                console.error('Error al procesar la imagen:', error);
+                res.json(estado[500]);
+              });
+            }).catch(error => {
+              console.error('Error al procesar el texto:', error);
+              res.json(estado[500]);
+            });
+        } else {
+            res.json(estado[405]);
+        }
+    } else {
+        res.json(estado[403]);
+    }
+  } catch (e) {
+    console.log(e);
+    res.json(estado[500]);
+  }
+});
+
+router.get('/texpro-toxic', async (req, res) => {
+  try {
+    var apikey = req.query.apikey;
+    var text = req.query.text;
+    if (!apikey) throw res.json(estado[402]);
+    if (!text) throw res.json({ error: "campo text incompleto"})
+    if (user(apikey)) {
+        if (saldo(apikey) >= 1) {
+            menosgold(apikey, 1)
+            texpro1("toxic", text).then(result => {
+              imgtext(result.image).then(finish => {
+    res.sendFile(__path + '/temp/textpro.jpg')
+              }).catch(error => {
+                console.error('Error al procesar la imagen:', error);
+                res.json(estado[500]);
+              });
+            }).catch(error => {
+              console.error('Error al procesar el texto:', error);
+              res.json(estado[500]);
+            });
+        } else {
+            res.json(estado[405]);
+        }
+    } else {
+        res.json(estado[403]);
+    }
+  } catch (e) {
+    console.log(e);
+    res.json(estado[500]);
+  }
+});
+
+router.get('/texpro-hallowen', async (req, res) => {
+  try {
+    var apikey = req.query.apikey;
+    var text = req.query.text;
+    if (!apikey) throw res.json(estado[402]);
+    if (!text) throw res.json({ error: "campo text incompleto"})
+    if (user(apikey)) {
+        if (saldo(apikey) >= 1) {
+            menosgold(apikey, 1)
+            texpro1("hallowen", text).then(result => {
+              imgtext(result.image).then(finish => {
+    res.sendFile(__path + '/temp/textpro.jpg')
+              }).catch(error => {
+                console.error('Error al procesar la imagen:', error);
+                res.json(estado[500]);
+              });
+            }).catch(error => {
+              console.error('Error al procesar el texto:', error);
+              res.json(estado[500]);
+            });
+        } else {
+            res.json(estado[405]);
+        }
+    } else {
+        res.json(estado[403]);
+    }
+  } catch (e) {
+    console.log(e);
+    res.json(estado[500]);
+  }
+});
+
+router.get('/texpro-liquid', async (req, res) => {
+  try {
+    var apikey = req.query.apikey;
+    var text = req.query.text;
+    if (!apikey) throw res.json(estado[402]);
+    if (!text) throw res.json({ error: "campo text incompleto"})
+    if (user(apikey)) {
+        if (saldo(apikey) >= 1) {
+            menosgold(apikey, 1)
+            texpro1("liquid", text).then(result => {
+              imgtext(result.image).then(finish => {
+    res.sendFile(__path + '/temp/textpro.jpg')
+              }).catch(error => {
+                console.error('Error al procesar la imagen:', error);
+                res.json(estado[500]);
+              });
+            }).catch(error => {
+              console.error('Error al procesar el texto:', error);
+              res.json(estado[500]);
+            });
+        } else {
+            res.json(estado[405]);
+        }
+    } else {
+        res.json(estado[403]);
+    }
+  } catch (e) {
+    console.log(e);
+    res.json(estado[500]);
+  }
+});
+
+router.get('/texpro-pokemon', async (req, res) => {
+  try {
+    var apikey = req.query.apikey;
+    var text = req.query.text;
+    if (!apikey) throw res.json(estado[402]);
+    if (!text) throw res.json({ error: "campo text incompleto"})
+    if (user(apikey)) {
+        if (saldo(apikey) >= 1) {
+            menosgold(apikey, 1)
+            texpro1("pokemon", text).then(result => {
+              imgtext(result.image).then(finish => {
+    res.sendFile(__path + '/temp/textpro.jpg')
+              }).catch(error => {
+                console.error('Error al procesar la imagen:', error);
+                res.json(estado[500]);
+              });
+            }).catch(error => {
+              console.error('Error al procesar el texto:', error);
+              res.json(estado[500]);
+            });
+        } else {
+            res.json(estado[405]);
+        }
+    } else {
+        res.json(estado[403]);
+    }
+  } catch (e) {
+    console.log(e);
+    res.json(estado[500]);
+  }
+});
+
+router.get('/texpro-joker', async (req, res) => {
+  try {
+    var apikey = req.query.apikey;
+    var text = req.query.text;
+    if (!apikey) throw res.json(estado[402]);
+    if (!text) throw res.json({ error: "campo text incompleto"})
+    if (user(apikey)) {
+        if (saldo(apikey) >= 1) {
+            menosgold(apikey, 1)
+            texpro1("joker", text).then(result => {
+              imgtext(result.image).then(finish => {
+    res.sendFile(__path + '/temp/textpro.jpg')
+              }).catch(error => {
+                console.error('Error al procesar la imagen:', error);
+                res.json(estado[500]);
+              });
+            }).catch(error => {
+              console.error('Error al procesar el texto:', error);
+              res.json(estado[500]);
+            });
+        } else {
+            res.json(estado[405]);
+        }
+    } else {
+        res.json(estado[403]);
+    }
+  } catch (e) {
+    console.log(e);
+    res.json(estado[500]);
+  }
+});
+
+router.get('/texpro-sangre', async (req, res) => {
+  try {
+    var apikey = req.query.apikey;
+    var text = req.query.text;
+    if (!apikey) throw res.json(estado[402]);
+    if (!text) throw res.json({ error: "campo text incompleto"})
+    if (user(apikey)) {
+        if (saldo(apikey) >= 1) {
+            menosgold(apikey, 1)
+            texpro1("sangre", text).then(result => {
+              imgtext(result.image).then(finish => {
+    res.sendFile(__path + '/temp/textpro.jpg')
+              }).catch(error => {
+                console.error('Error al procesar la imagen:', error);
+                res.json(estado[500]);
+              });
+            }).catch(error => {
+              console.error('Error al procesar el texto:', error);
+              res.json(estado[500]);
+            });
+        } else {
+            res.json(estado[405]);
+        }
+    } else {
+        res.json(estado[403]);
+    }
+  } catch (e) {
+    console.log(e);
+    res.json(estado[500]);
+  }
+});
+
+router.get('/texpro-magma', async (req, res) => {
+  try {
+    var apikey = req.query.apikey;
+    var text = req.query.text;
+    if (!apikey) throw res.json(estado[402]);
+    if (!text) throw res.json({ error: "campo text incompleto"})
+    if (user(apikey)) {
+        if (saldo(apikey) >= 1) {
+            menosgold(apikey, 1)
+            texpro1("magma", text).then(result => {
+              imgtext(result.image).then(finish => {
+    res.sendFile(__path + '/temp/textpro.jpg')
+              }).catch(error => {
+                console.error('Error al procesar la imagen:', error);
+                res.json(estado[500]);
+              });
+            }).catch(error => {
+              console.error('Error al procesar el texto:', error);
+              res.json(estado[500]);
+            });
+        } else {
+            res.json(estado[405]);
+        }
+    } else {
+        res.json(estado[403]);
+    }
+  } catch (e) {
+    console.log(e);
+    res.json(estado[500]);
+  }
+});
+
+router.get('/texpro-batman', async (req, res) => {
+  try {
+    var apikey = req.query.apikey;
+    var text = req.query.text;
+    if (!apikey) throw res.json(estado[402]);
+    if (!text) throw res.json({ error: "campo text incompleto"})
+    if (user(apikey)) {
+        if (saldo(apikey) >= 1) {
+            menosgold(apikey, 1)
+            texpro1("batman", text).then(result => {
+              imgtext(result.image).then(finish => {
+    res.sendFile(__path + '/temp/textpro.jpg')
+              }).catch(error => {
+                console.error('Error al procesar la imagen:', error);
+                res.json(estado[500]);
+              });
+            }).catch(error => {
+              console.error('Error al procesar el texto:', error);
+              res.json(estado[500]);
+            });
+        } else {
+            res.json(estado[405]);
+        }
+    } else {
+        res.json(estado[403]);
+    }
+  } catch (e) {
+    console.log(e);
+    res.json(estado[500]);
+  }
+});
+
+router.get('/texpro-lava', async (req, res) => {
+  try {
+    var apikey = req.query.apikey;
+    var text = req.query.text;
+    if (!apikey) throw res.json(estado[402]);
+    if (!text) throw res.json({ error: "campo text incompleto"})
+    if (user(apikey)) {
+        if (saldo(apikey) >= 1) {
+            menosgold(apikey, 1)
+            texpro1("lava", text).then(result => {
+              imgtext(result.image).then(finish => {
+    res.sendFile(__path + '/temp/textpro.jpg')
+              }).catch(error => {
+                console.error('Error al procesar la imagen:', error);
+                res.json(estado[500]);
+              });
+            }).catch(error => {
+              console.error('Error al procesar el texto:', error);
+              res.json(estado[500]);
+            });
+        } else {
+            res.json(estado[405]);
+        }
+    } else {
+        res.json(estado[403]);
+    }
+  } catch (e) {
+    console.log(e);
+    res.json(estado[500]);
+  }
+});
 
 router.get('/spotify', async (req, res) => {
 try {

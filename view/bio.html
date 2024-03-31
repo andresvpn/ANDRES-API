@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ANDRES-VPN</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        background-color: #f8f9fa;
+        overflow: hidden; /* Evita la barra de desplazamiento vertical */
+        position: relative;
+    }
+    .container {
+        max-width: 800px;
+        margin: 50px auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        text-align: center;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        position: relative; /* Para que los elementos internos sean posicionados relativos a este contenedor */
+        z-index: 1; /* Para estar sobre las olas */
+    }
+    .profile-img {
+        border-radius: 50%;
+        width: 200px;
+        height: 200px;
+        object-fit: cover;
+        margin-bottom: 20px;
+    }
+    .social-icons {
+        margin-top: 20px;
+    }
+    .social-icons a {
+        color: #333;
+        text-decoration: none;
+        font-size: 24px;
+        margin: 0 10px;
+        transition: color 0.3s;
+    }
+    .social-icons a:hover {
+        color: #f00; /* Cambia el color al pasar el mouse */
+        transform: scale(1.2); /* Efecto de aumento de tamaño */
+    }
+    .btn {
+        display: inline-block;
+        padding: 10px 20px;
+        margin-top: 20px;
+        background-color: #007bff;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+    }
+    .btn:hover {
+        background-color: #0056b3; /* Cambia el color al pasar el mouse */
+    }
+    
+    .video-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw; /* 100% del ancho de la ventana */
+    height: 100vh; /* 100% de la altura de la ventana */
+    overflow: hidden;
+    z-index: -1;
+}
+
+#video-bg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Centrar el video */
+    min-width: 100%;
+    min-height: 100%;
+}
+
+</style>
+</head>
+<body>
+    <div class="video-container">
+        <video autoplay muted loop id="video-bg">
+            <source src="api/video-edit3" type="video/mp4">
+        </video>
+    <div class="container">
+        <img class="profile-img" src="https://telegra.ph/file/8e7046bdc9608ea9a8edf.jpg" alt="Profile Picture">
+        <h1>ANDRES-VPN</h1>
+        <p>Desarrollador de Software 🤖
+        <br>Joven poeta 🥀</br>
+        Compositor 🎶
+        <br>Emprendedor 🏢</br>
+        </p>
+        
+        <div class="social-icons">
+            <a href="https://wa.me/573043603261/" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            <a href="https://www.tiktok.com/@andres_carvajal_ofc?_t=8ktoypI5qq5&_r=1" target="_blank"><i class="fab fa-tiktok"></i></a>
+            <a href="https://www.instagram.com/andres_carvajal_ofc?igsh=MXBtM2dsdHl5aTJkaQ==" target="_blank"><i class="fab fa-instagram"></i></a>
+        </div>
+        <a href="/service" class="btn" target="_blank">SERVICIOS</a>
+    </div>
+    </div>
+</body>
+</html>

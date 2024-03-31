@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MAX</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            overflow: hidden; /* Ocultar contenido que se desborde */
+            background-color: #fff;
+            position: relative;
+        }
+        .icon {
+            float: left;
+            margin-right: 20px;
+            border-radius: 50%;
+            overflow: hidden;
+            width: 70px; /* Tamaño del icono */
+            height: 70px; /* Tamaño del icono */
+        }
+        .title {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        .price {
+            font-size: 20px;
+            color: #007bff;
+            margin-bottom: 10px;
+        }
+        .description-panel {
+            background-color: #f8f9fa;
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            max-height: 200px; /* Altura máxima inicial */
+            overflow-y: auto; /* Desplazamiento vertical si es necesario */
+        }
+        .description-panel.expanded {
+            max-height: none; /* Altura máxima sin límites */
+        }
+        .description {
+            margin: 0;
+            color: rgba(0, 0, 0, 0.7);
+        }
+.img-container {
+    white-space: nowrap;
+    overflow-x: auto; /* Desplazamiento horizontal si es necesario */
+    overflow-y: hidden; /* Sin desplazamiento vertical */
+    margin-bottom: 20px;
+    text-align: center;
+    display: flex; /* Usar flexbox para alinear las imágenes */
+}
+
+.img-container img {
+    flex: 0 0 auto; /* No crecer, no encoger, tamaño automático */
+    height: 150px; /* Altura fija de las imágenes */
+    margin-right: 10px;
+    border-radius: 5px;
+}
+        @keyframes rotateImages {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+        .purchase-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            text-align: center;
+            position: relative;
+        }
+        .purchase-btn:hover {
+            background-color: #0056b3;
+        }
+        .cart-icon {
+            position: absolute;
+            top: 50%;
+            left: 10px;
+            transform: translateY(-50%);
+        }
+        
+            .video-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw; /* 100% del ancho de la ventana */
+    height: 100vh; /* 100% de la altura de la ventana */
+    overflow: hidden;
+    z-index: -1;
+}
+
+#video-bg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Centrar el video */
+    min-width: 100%;
+    min-height: 100%;
+}
+    </style>
+</head>
+<body>
+<div class="video-container">
+        <video autoplay muted loop id="video-bg">
+            <source src="/api/video-edit3" type="video/mp4">
+        </video>
+    <div class="container">
+        <img class="icon" src="https://telegra.ph/file/a3190cd2c360d0c83ec18.jpg" alt="Icono del producto">
+        <h1 class="title">MAX</h1>
+        <p class="price">Valor: <span style="font-weight: bold; color: #007bff;">$10.000</span></p>
+        <div class="description-panel" onclick="expandPanel(this)">
+            <p class="description">Max ofrece más de 37 mil horas de contenido de alta calidad, los cuales contienen marcas como HBO, Warner Bros., DC, Discovery, Cartoon Network, Discovery Kids, entre muchas más. Además de películas y series de Warner Bros, como Barbie, y las series de Friends y The Big Bang Theory.</p>
+        </div>
+        <div class="img-container">
+            <img src="https://telegra.ph/file/e999b82b7d855963c06b6.jpg" alt="Imagen 1">
+            <img src="https://telegra.ph/file/b92b4b100383cd3c5a79a.jpg" alt="Imagen 2">
+            <img src="https://telegra.ph/file/b35363cc989e50a764e68.jpg" alt="Imagen 3">
+            <img src="https://telegra.ph/file/ff7a760746d89c3408b00.jpg" alt="Imagen 4">
+        </div>
+        <div style="text-align: center;">
+            <a class="purchase-btn" href="payment">
+                <span class="cart-icon">🛒</span> ¡Comprar ahora!
+            </a>
+        </div>
+    </div>
+    </div>
+
+    <script>
+        function expandPanel(panel) {
+            panel.classList.toggle('expanded');
+        }
+    </script>
+</body>
+</html>
